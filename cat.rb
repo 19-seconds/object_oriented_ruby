@@ -14,5 +14,5 @@ end
 cat = Cat.new({name: "Fluffy", breed: "Persian", weight: 4.5})
 puts cat.breed
 puts cat.weight
-cat.name = "Chico"
 puts cat.weight
+cat.name = "Chico"

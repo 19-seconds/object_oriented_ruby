@@ -15,10 +15,24 @@ class Employee
 
 end
 
+class Manager < Employee
 
-mark = Employee.new({first_name: "Mark", last_name: "Richardson", salary: 20000})
-puts mark.info
-# puts employee.first_name
-# puts employee.last_name
-# employee.salary = 25000
-# puts employee.salary
+  def send_report
+    puts "Sending Email......"
+    puts "Email sent!"
+  end
+
+end
+
+
+
+
+
+
+
+employee1 = Employee.new({first_name: "Bob", last_name: "Campos", salary: 20000})
+manager1 = Manager.new({first_name: "Sally", last_name: "Miller", salary: 20000})
+
+p employee1
+manager1.send_report
+puts manager1.info
