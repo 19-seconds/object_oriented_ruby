@@ -1,3 +1,15 @@
+module ReportEmail
+
+  def send_report
+    puts "Sending Email......"
+    puts "Email sent!"
+  end
+
+  def send_all_reports
+    puts "send all reports..."
+  end
+end
+
 class Employee
 
   attr_reader :first_name, :last_name, :salary
@@ -10,27 +22,17 @@ class Employee
   end
 
   def info
-    "#{@first_name} #{@last_name} makes #{@salary} a year"
+    puts "#{@first_name} #{@last_name} makes #{@salary} a year"
   end
-
 end
 
 class Manager < Employee
+  include ReportEmail
 
   def initialize(employee_hash)
     super
     @employees = employee_hash[:employees]
   end
-
-  def send_report
-    puts "Sending Email......"
-    puts "Email sent!"
-  end
-
-  # def info
-  #   super
-  #   puts "this manager has #{@employees.count}"
-  # end
 
   def print_subordinates
     index = 1
@@ -40,6 +42,21 @@ class Manager < Employee
     end
   end
 
+  def give_all_raises
+    @employees.each do |employee|
+      employee.give_annual_raise
+    end
+  end
+
+  def fire_all_employees
+    @employees.each do |employee|
+      employee.active = false
+    end
+  end
+end
+
+class Intern < Employee
+  include ReportEmail
 end
 
 
@@ -51,9 +68,11 @@ end
 employee1 = Employee.new({first_name: "Bob", last_name: "Campos", salary: 20000})
 employee2 = Employee.new({first_name: "Carl", last_name: "Anderson", salary: 20000})
 manager1 = Manager.new({first_name: "Sally", last_name: "Miller", salary: 20000, employees: [employee1, employee2]})
+intern1 = Intern.new({first_name: "Joesph", last_name: "Alpha", salary: 20000})
 
-# p employee1
 
-# manager1.send_report
-# puts manager1.info
-manager1.print_subordinates
+manager1.info
+manager1.send_report
+
+intern1.info
+intern1.fire_all_employees
