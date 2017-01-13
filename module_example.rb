@@ -1,4 +1,13 @@
-class Vehicle
+module Engine
+
+  def start_engine
+    puts "vmmmmmmmm"
+  end
+
+end
+
+
+module Motion
 
   def initialize
     @speed = 0
@@ -20,21 +29,26 @@ class Vehicle
 end
 
 
-class Car < Vehicle
+class Car
+  include Motion
+  include Engine
 
   def honk_horn
-    puts "Beeeeeeep!"
+    "Beeeeeeep!"
   end
 end
 
-class Bike < Vehicle
-
+class Bike
+  include Motion
+  
   def ring_bell
-    puts "Ring ring!"
+    "Ring ring!"
   end
 end
 
-vehicle = Vehicle.new
+
 car = Car.new
-puts vehicle.ring_bell
-puts car.ring_bell
+bike = Bike.new
+puts bike.ring_bell
+puts car.honk_horn
+car.start_engine
